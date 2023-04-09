@@ -4,10 +4,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import racingcar.model.Car;
 
 import java.io.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class RacingGameTest {
 
@@ -20,6 +22,16 @@ public class RacingGameTest {
         RacingGame car = new RacingGame();
         car.setCarNumber();
         assertThat(car.getCarNumber()).isEqualTo(3);
+    }
+
+    @Test
+    @DisplayName("자동차 이름을 입력한다")
+    void input_car_names() {
+        mockInputStream("pobi,crong,honux");
+
+        RacingGame car = new RacingGame();
+        car.setCars();
+        assertThat(car.getCars().size()).isEqualTo(3);
     }
 
     @Test
@@ -40,6 +52,25 @@ public class RacingGameTest {
         assertThat(car.goOrStop(4, randomNumber)).isEqualTo(expected);
     }
 
+    @Test
+    @DisplayName("자동차 객체를 생성한다.")
+    void create_new_car(){
+        RacingGame game = new RacingGame();
+        game.addCars(new String[]{"pobi","crong"});
+
+        assertThat(game.getCars().size()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("자동차 명이 5자를 초과하면 에러 발생")
+    void generate_runtime_exception_when_name_over_five(){
+        RacingGame game = new RacingGame();
+        assertThatThrownBy(()->{
+            game.addCars(new String[]{"pobi1234","crong"});
+        })
+        .isInstanceOf(RuntimeException.class)
+                .hasMessage("자동차 이름은 5자를 초과할 수 없습니다");
+    }
 
     private void mockInputStream(String input) {
         OutputStream out = new ByteArrayOutputStream();

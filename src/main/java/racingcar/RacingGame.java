@@ -1,5 +1,9 @@
 package racingcar;
 
+import racingcar.model.Car;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class RacingGame {
@@ -9,8 +13,24 @@ public class RacingGame {
     private int[] cars;
     private int moveTimes;
 
+    private List<Car> carList = new ArrayList<>();
+
     public void setCarNumber() {
         cars = new int[InputView.setCarNumber()];
+    }
+
+    public void setCars(){
+        addCars(InputView.setCarNames().split(","));
+    }
+
+    public void addCars(String[] names) {
+        for (String name : names) {
+            carList.add(createNewCar(name));
+        }
+    }
+
+    private Car createNewCar(String name) {
+        return new Car(name, 0);
     }
 
     public void setMoveTimes() {
@@ -22,17 +42,25 @@ public class RacingGame {
 
         for (int i = 0; i < moveTimes; i++) {
             moveCars();
-            ResultView.printResult(cars);
+            ResultView.printResult(carList);
+            ResultView.printWinner(carList);
         }
     }
-
     private void moveCars() {
-        for (int j = 0; j < cars.length; j++) {
+        for (Car car : carList) {
             if (goOrStop(RUN_CONDITION, getRandomValue())) {
-                cars[j] += 1;
+                car.move();
             }
         }
     }
+
+//    private void moveCars() {
+//        for (int j = 0; j < cars.length; j++) {
+//            if (goOrStop(RUN_CONDITION, getRandomValue())) {
+//                cars[j] += 1;
+//            }
+//        }
+//    }
 
     public boolean goOrStop(int condition, int value) {
         return value >= condition ? true : false;
@@ -51,4 +79,7 @@ public class RacingGame {
         return moveTimes;
     }
 
+    public List<Car> getCars() {
+        return carList;
+    }
 }
