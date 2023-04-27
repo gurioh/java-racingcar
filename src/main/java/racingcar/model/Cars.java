@@ -54,26 +54,19 @@ public class Cars {
         return cars.size();
     }
 
-    public String getWinners() {
+    public List<String> getWinners() {
         return getWinnersNames(calculateMaxPosition(cars));
     }
 
-    private String getWinnersNames(int max) {
-        StringBuilder winners = new StringBuilder();
+    private List<String> getWinnersNames(int max) {
+        List<String> winners = new ArrayList<String>();
         for (Car car : cars) {
             if (car.equalPosition(max)){
-                appendCarName(winners, car);
+                winners.add(car.getName());
             }
         }
 
-        return winners.toString();
-    }
-
-    private void appendCarName(StringBuilder winners, Car car) {
-        if(winners.length() > 0){
-            winners.append(" ");
-        }
-        winners.append(car.getName());
+        return winners;
     }
 
     private int calculateMaxPosition(List<Car> cars) {

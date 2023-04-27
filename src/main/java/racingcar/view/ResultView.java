@@ -6,6 +6,7 @@ import racingcar.model.Cars;
 
 public class ResultView {
     private static final String DASH = "-";
+    private static final String COMMA = ", ";
     private static String NAME_POSITION_FORMAT = "%s : %s";
     private static String WINNERS_FORMAT = "%s가 최종 우승했습니다.";
 
@@ -36,7 +37,7 @@ public class ResultView {
     public static void printWinner(Cars cars){
         System.out.println(
                 String.format(
-                        WINNERS_FORMAT,cars.getWinners()
+                        WINNERS_FORMAT,String.join(COMMA,cars.getWinners())
                 )
         );
     }
