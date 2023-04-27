@@ -18,12 +18,10 @@ public class RacingGameService {
 
     public void setCarNumber() {
         this.cars = new Cars(InputView.setCarNumber());
-//        this.cars.setCarNumber(InputView.setCarNumber());
     }
 
     public void setCarNames() {
         this.cars = new Cars(InputView.setCarNames().split(CAR_NAME_DELIMITER));
-//        this.cars.setCarNames(InputView.setCarNames().split(CAR_NAME_DELIMITER));
     }
 
     public void setMoveTimes() {
