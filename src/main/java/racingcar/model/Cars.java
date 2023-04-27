@@ -61,18 +61,12 @@ public class Cars {
     private String getWinnersNames(int max) {
         StringBuilder winners = new StringBuilder();
         for (Car car : cars) {
-            boolean equal  = checkEqualMax(max, car);
-
-            if (equal){
+            if (car.equalPosition(max)){
                 appendCarName(winners, car);
             }
         }
 
         return winners.toString();
-    }
-
-    private boolean checkEqualMax(int max, Car car) {
-        return car.getPosition() == max;
     }
 
     private void appendCarName(StringBuilder winners, Car car) {

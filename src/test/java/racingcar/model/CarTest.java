@@ -79,4 +79,13 @@ class CarTest {
         assertThat(cars.getMaxPosition(1, cars.getCar().get(0))).isEqualTo(2);
         assertThat(cars.getMaxPosition(3, cars.getCar().get(0))).isEqualTo(3);
     }
+
+
+    @Test
+    @DisplayName("Car 객체 내부에서 포지션이 같은지 확인할 수 있다. 같으면 true 다르면 false")
+    void check_position_equal_or_not(){
+        Car car = new Car("test");
+        assertThat(car.equalPosition(10)).isEqualTo(false);
+        assertThat(car.equalPosition(0)).isEqualTo(true);
+    }
 }

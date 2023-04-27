@@ -42,4 +42,7 @@ public class Car {
     public String getName() {return this.name;}
 
 
+    public boolean equalPosition(int value) {
+        return this.position == value;
+    }
 }
