@@ -33,10 +33,17 @@ public class RacingGameService {
 
         for (int i = 0; i < moveTimes; i++) {
             cars.moveCars();
-            cars.printResult();
+            printPosition();
         }
 
-        cars.printWinner();
+        ResultView.printWinner(cars.getWinners());
+    }
+
+    private void printPosition() {
+        for (Car car : cars.getCar()) {
+            ResultView.printCarPosition(car.getName(), car.getPosition());
+        }
+        System.out.println();
     }
 
     public int getCarNumber() {

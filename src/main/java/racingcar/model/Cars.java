@@ -81,14 +81,6 @@ public class Cars {
         return Math.max(max, car.getPosition());
     }
 
-    public void printWinner() {
-        ResultView.printWinner(this);
-    }
-
-    public void printResult() {
-        ResultView.printResultWithName(this);
-    }
-
     public void moveCars() {
         for (Car car : cars) {
             car.move(getRandomValue());
